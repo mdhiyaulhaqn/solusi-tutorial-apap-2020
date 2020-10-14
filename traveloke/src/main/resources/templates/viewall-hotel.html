@@ -6,10 +6,10 @@
 <body>
     <h2>Daftar Seluruh Hotel</h2>
     <div th:each="hotel: ${listHotel}">
-        <h3 th:text="'Id Hotel: '+ ${hotel.idHotel}"></h3>
+        <h3 th:text="'Id Hotel: '+ ${hotel.id}"></h3>
         <h3 th:text="'Nama Hotel: '+ ${hotel.namaHotel}"></h3>
         <h3 th:text="'Alamat Hotel: '+ ${hotel.alamat}"></h3>
-        <h3 th:text="'Nomor Telepon: '+ ${hotel.noTelepon}"></h3>
+        <h3 th:text="'Nomor Telepon: '+ ${hotel.nomorTelepon}"></h3>
         <hr>
     </div>
 </body>

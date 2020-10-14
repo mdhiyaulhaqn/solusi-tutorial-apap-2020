@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Add Hotel</title>
+</head>
+<body>
+<h2>Hello</h2>
+<h3>Tambah Hotel</h3>
+<form th:action="@{/hotel/add}"th:object="${hotel}" method = "POST">
+    Nama Hotel: <br>
+    <input type="text" name="namaHotel"/>
+    <br><br>
+    Alamat : <br>
+    <input type="text" name="alamat"/>
+    <br><br>
+    Nomor Telepon : <br>
+    <input type="number" name="nomorTelepon"/>
+    <br><br>
+    <button type = "submit">Submit</button>
+</form>
+</body>
+</html>
+

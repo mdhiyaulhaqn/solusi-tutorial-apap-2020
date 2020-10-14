@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Add Kamar</title>
+</head>
+<body>
+<h3>Tambah Kamar</h3>
+<form th:action="@{/kamar/add}" th:object="${kamar}" method = "POST">
+    <input type="hidden" th:field="*{hotel}"/>
+    Nama Kamar: <br>
+    <input type="text" name="namaKamar"/>
+    <br>
+    Tipe Kamar : <br>
+    <select name="tipe">
+        <option value="0">Deluxe</option>
+        <option value="1">Executive</option>
+        <option value="2">President Suite</option>
+    </select>
+    <br>
+    Kapasitas Kamar : <br>
+    <input type="number" name="kapasitasKamar"/>
+    <br>
+    <button type = "submit">Submit</button>
+</form>
+</body>
+</html>
+

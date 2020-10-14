@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Update Kamar</title>
+</head>
+<body>
+<h2 th:text="'Kamar dengan nomor ' + ${kamar.noKamar} + ' berhasil diubah.'"></h2>
+<td><a th:href="@{/hotel/view?idHotel=}+${kamar.getHotel().id}">Kembali</a></td>
+</body>
+</html>
