@@ -21,11 +21,6 @@ public class HotelController {
     @Autowired
     private KamarService kamarService;
 
-    @GetMapping("/")
-    private String home(){
-        return "home";
-    }
-
     @GetMapping("/hotel/add")
     public String addHotelFormPage(Model model){
         model.addAttribute("hotel", new HotelModel());
