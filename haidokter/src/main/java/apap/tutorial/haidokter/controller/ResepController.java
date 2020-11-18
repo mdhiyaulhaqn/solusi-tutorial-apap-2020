@@ -2,7 +2,6 @@ package apap.tutorial.haidokter.controller;
 
 import apap.tutorial.haidokter.model.ObatModel;
 import apap.tutorial.haidokter.model.ResepModel;
-import apap.tutorial.haidokter.service.ObatService;
 import apap.tutorial.haidokter.service.ResepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,11 +16,6 @@ public class ResepController {
     @Qualifier("resepServiceImpl")
     @Autowired
     private ResepService resepService;
-
-    @GetMapping("/")
-    private String home() {
-        return "home";
-    }
 
     @GetMapping("/resep/add")
     public String addResepFormPage(Model model) {
@@ -87,7 +81,7 @@ public class ResepController {
         }
         model.addAttribute("msg", "Nomor Resep Tidak Ditemukan atau Nomor Resep Tidak Ada!");
 
-        return "error";
+        return "errors";
     }
 
     @GetMapping("/resep/viewall")
@@ -113,12 +107,12 @@ public class ResepController {
             } else if (hasObat(noResep)) {
                 model.addAttribute("msg", "Resep masih memiliki obat! Hapus obat terlebih dahulu!");
 
-                return "error";
+                return "errors";
             }
         }
         model.addAttribute("msg", "Nomor Resep Tidak Ditemukan atau Nomor Resep Tidak Ada!");
 
-        return "error";
+        return "errors";
     }
 
     private boolean isResepExists(Long noResep) {
