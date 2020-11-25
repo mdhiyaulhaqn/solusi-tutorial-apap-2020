@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div th:if="${is_admin}" class="row">
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">Tambah User Baru</div>
@@ -54,7 +54,7 @@
                 <label>User Name</label>
                 <input type="text" name="username" class="form-control"/>
                 <label>Password</label>
-                <input type="password" name="password" class="form-control">
+                <input  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Minimum eight characters, at least one letter and one number" type="password" name="password" class="form-control">
                 <label>Role</label>
                 <select name="role" class="form-control">
                   <option selected value="">-- Pilih Role --</option>
