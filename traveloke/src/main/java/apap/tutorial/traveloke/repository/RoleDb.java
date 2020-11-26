@@ -12,5 +12,4 @@ import java.util.Optional;
 @Repository
 public interface RoleDb  extends JpaRepository<RoleModel, Long> {
     List<RoleModel> findAll();
-    Optional<RoleModel> findByNama(String nama);
 }
