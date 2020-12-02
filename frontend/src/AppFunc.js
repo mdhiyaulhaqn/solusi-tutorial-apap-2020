@@ -86,7 +86,7 @@ function App() {
                 <List
                     title="List Movies"
                     items={listMovies}
-                    onItemClick={handleItemClick}
+                    onItemClick={addToFavorites}
                 />
                 </div>
                 <div className={`col-sm ${showFav ? "d-block" : "d-none"}`}>
