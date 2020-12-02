@@ -1,6 +1,6 @@
 import React from "react";
 
-import List from "components/List";
+import List from "./components/List";
 import listMovies from "movies.json";
 import "./App.css";
 
