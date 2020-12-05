@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
 public class ResepRestController {
     @Autowired
@@ -24,11 +25,8 @@ public class ResepRestController {
     @PostMapping(value = "resep")
     private ResepModel createResep(@Valid @RequestBody ResepModel resep, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
-            );
-        }
-        else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+        } else {
             return resepRestService.createResep(resep);
         }
     }
@@ -39,13 +37,11 @@ public class ResepRestController {
             resepRestService.deleteResep(noResep);
             return ResponseEntity.ok("Resep with Number " + String.valueOf(noResep) + " deleted!");
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Resep with Number " + String.valueOf(noResep) + " not found!"
-            );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Resep with Number " + String.valueOf(noResep) + " not found!");
         } catch (UnsupportedOperationException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Resep still has Obat, please delete the Obat first!"
-            );
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Resep still has Obat, please delete the Obat first!");
         }
     }
 
@@ -54,14 +50,15 @@ public class ResepRestController {
         try {
             return resepRestService.changeResep(noResep, resep);
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Resep with Number " + String.valueOf(noResep) + " not found!"
-            );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Resep with Number " + String.valueOf(noResep) + " not found!");
         }
     }
 
     @GetMapping(value = "/reseps")
-    private List<ResepModel> retrieveListResep() { return resepRestService.retrieveListResep(); }
+    private List<ResepModel> retrieveListResep() {
+        return resepRestService.retrieveListResep();
+    }
 
     @GetMapping(value = "/resep/{noResep}/status")
     private Mono<String> getStatus(@PathVariable Long noResep) {

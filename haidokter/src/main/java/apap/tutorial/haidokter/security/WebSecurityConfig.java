@@ -10,45 +10,46 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
-                authorizeRequests()
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/js/**").permitAll()
-                .antMatchers("/resep/**").hasAnyAuthority("APOTEKER")
-                .antMatchers("/obat/**").hasAnyAuthority("APOTEKER")
-                .antMatchers("/obat/**").hasAnyAuthority("APOTEKER")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
-                .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+        http
+            .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
+            .authorizeRequests()
+            .antMatchers("/css/**").permitAll()
+            .antMatchers("/js/**").permitAll()
+            .antMatchers("/api/v1/**").permitAll()
+            .antMatchers("/resep/**").hasAnyAuthority("APOTEKER")
+            .antMatchers("/obat/**").hasAnyAuthority("APOTEKER")
+            .antMatchers("/obat/**").hasAnyAuthority("APOTEKER")
+            .anyRequest().authenticated().and()
+            .formLogin().loginPage("/login").permitAll().and()
+            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
     }
+
     @Bean
-    public BCryptPasswordEncoder encoder(){
+    public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.inMemoryAuthentication()
-//                .passwordEncoder(encoder())
-//                .withUser("odading").password(encoder().encode("mangoleh"))
-//                .roles("USER");
-//    }
-
+    // @Autowired
+    // public void configureGlobal(AuthenticationManagerBuilder auth) throws
+    // Exception{
+    // auth.inMemoryAuthentication()
+    // .passwordEncoder(encoder())
+    // .withUser("odading").password(encoder().encode("mangoleh"))
+    // .roles("USER");
+    // }
 
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
     }
 }
