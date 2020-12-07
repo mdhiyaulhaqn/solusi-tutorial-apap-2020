@@ -1,0 +1,11 @@
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  margin: 0px 12px;
+  cursor: pointer;
+  color: #346cce;
+  font-weight: bold;
+}
