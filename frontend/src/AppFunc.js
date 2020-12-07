@@ -55,6 +55,11 @@ function App() {
 
     return (
         <div className="container-fluid">
+            <label className="switch">
+              <input type="checkbox" onClick={toggleShow} />
+              <span className="slider round"></span>
+            </label>
+            <span>Dark Mode</span>
             <h1 className="text-center mt-3 mb-0">Favorites Movie App</h1>
             <p className="text-center text-secondary text-sm font-italic">
             (This is a <strong>function-based</strong> application)

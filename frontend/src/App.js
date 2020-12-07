@@ -8,6 +8,7 @@ export default class App extends React.Component {
   state = {
     favItems: [],
     showFav: false,
+    darkMode: false,
   };
 
   handleItemClick = (item) => {
@@ -39,18 +40,34 @@ export default class App extends React.Component {
     this.setState((prevState) => ({
       showFav: !prevState.showFav,
     }));
+    console.log(!this.state.showFav)
   };
+
+  toggleDarkMode = () => {
+    this.setState((prevState) => ({
+      darkMode: !prevState.darkMode,
+    }));
+    localStorage.setItem('darkMode', this.state.darkMode)
+  }
 
   render() {
     const { favItems, showFav } = this.state;
-
     return (
-      <div className="container-fluid">
+      <div className={`container-fluid ${JSON.parse(localStorage.getItem('darkMode'))? 'bg-dark text-white' : ''}`}>
         <h1 className="text-center mt-3 mb-0">Favorites Movie App</h1>
         <p className="text-center text-secondary text-sm font-italic">
           (This is a <strong>class-based</strong> application)
         </p>
         <div className="d-flex justify-content-center align-items-center">
+        <div
+            className="d-flex justify-content-center align-items-center mr-4"
+          >
+            <label className="switch">
+              <input type="checkbox" onChange={this.toggleDarkMode} checked={JSON.parse(localStorage.getItem('darkMode'))}/>
+              <span className="slider round"></span>
+            </label>
+            <span>Dark Mode</span>
+          </div>
           <div
             className={`d-flex justify-content-center align-items-center ${
               favItems.length > 0 ? "mr-4" : ""
