@@ -197,7 +197,7 @@ class HotelList extends Component {
             <h3 className={classes.modalTitle}>
               {this.state.isCreate
                 ? "Add Hotel"
-                : `Edit Hotel Nomor ${this.state.noHotel}`}
+                : `Edit Hotel Nomor ${this.state.id}`}
             </h3>
             <input
               className={classes.textField}
@@ -215,7 +215,7 @@ class HotelList extends Component {
               value={this.state.alamat}
               onChange={this.handleChangeField}
             />
-            <textarea
+            <input
               className={classes.textField}
               placeholder="Nomor Telepon"
               name="nomorTelepon"
@@ -244,3 +244,70 @@ class HotelList extends Component {
 }
 
 export default HotelList;
+// import React, { Component } from "react";
+ 
+// class HotelList extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       hotels: [
+//         {
+//           id: 1,
+//           namaHotel: "Hotel Papa",
+//           alamat: "Depok",
+//           nomorTelepon: "08211234",
+//         },
+//         {
+//           id: 2,
+//           namaHotel: "Hotel Mama",
+//           alamat: "Jekardah",
+//           nomorTelepon: "08211423",
+//         },
+//         {
+//           id: 1,
+//           namaHotel: "Hotel Dede",
+//           alamat: "Thepok",
+//           nomorTelepon: "08211234",
+//         },
+//       ],
+//       isLoading: false,
+//     };
+//     this.handleClickLoading = this.handleClickLoading.bind(this);
+//   }
+
+//   handleClickLoading() {
+//     const currentLoading = this.state.isLoading;
+//     this.setState({ isLoading: !currentLoading });
+//     console.log(this.state.isLoading);
+//   }
+
+ 
+//   componentDidMount() {
+//     console.log("componentDidMount()");
+//   }
+ 
+//   shouldComponentUpdate(nextProps, nextState) {
+//     console.log("shouldComponentUpdate()");
+//   }
+ 
+//   render() {
+//     return (
+//       <div className={classes.resepList}>
+//         <h1 className={classes.title}>All Hotels</h1>
+//         <div>
+//           {this.state.hotels.map((resep) => (
+//             <Hotel
+//               key={resep.id}
+//               id={resep.id}
+//               namaHotel={resep.namaHotel}
+//               alamat={resep.alamat}
+//               nomorTelepon={resep.nomorTelepon}
+//             />
+//           ))}
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+ 
+// export default HotelList;
