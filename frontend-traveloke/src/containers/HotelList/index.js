@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import classes from "./styles.module.css";
 import Modal from "../../components/Modal";
 import Pagination from "../../components/Pagination";
+import Spinner from "../../components/Spinner";
 
 const COUNT_PER_PAGE = 5;
 
@@ -45,6 +46,7 @@ class HotelList extends Component {
   }
 
   async loadData() {
+    this.setState({ isLoading: true });
     try {
       const { data } = await APIConfig.get("/hotels");
       console.log(data);
@@ -52,6 +54,8 @@ class HotelList extends Component {
     } catch (error) {
       alert("Oops terjadi masalah pada server");
       console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
     }
   }
 
@@ -146,8 +150,7 @@ class HotelList extends Component {
   }
 
   render() {
-    console.log("hotels : " + this.state.hotels);
-    console.log(this.state.hotels);
+    console.log(this.state.isLoading);
     const filteredHotels = this.state.hotels.filter(this.handleFilterHotel);
     return (
       <div className={classes.hotelList}>
@@ -163,6 +166,9 @@ class HotelList extends Component {
           value={this.state.searchHotel}
           onChange={this.handleChangeField}
         />
+        {this.state.isLoading ? (
+          <Spinner/>
+        ) : (
         <div>
           {filteredHotels
             .slice(
@@ -181,7 +187,7 @@ class HotelList extends Component {
                 handleDelete={() => this.handleDeleteHotel(hotel.id)}
               />
             ))}
-        </div>
+        </div>)}
         <Pagination
           totalPage={Math.ceil(filteredHotels.length / 5)}
           handleClickPage={this.handleChangePage}
