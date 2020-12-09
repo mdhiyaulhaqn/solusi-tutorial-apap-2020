@@ -177,6 +177,7 @@ class ResepList extends Component {
                 namaDokter={resep.namaDokter}
                 namaPasien={resep.namaPasien}
                 catatan={resep.catatan}
+                listObat={resep.listObat}
                 handleEdit={() => this.handleEditResep(resep)}
                 handleDelete={() => this.handleDeleteResep(resep.noResep)}
               />
