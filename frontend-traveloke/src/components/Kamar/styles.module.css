@@ -1,0 +1,9 @@
+.kamar {
+  margin: 8px 8px 8px 0px;
+  padding: 8px;
+  background-color: #346cce;
+  color: white;
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: bold;
+}

@@ -176,6 +176,7 @@ class HotelList extends Component {
                 namaHotel={hotel.namaHotel}
                 alamat={hotel.alamat}
                 nomorTelepon={hotel.nomorTelepon}
+                listKamar={hotel.listKamar}
                 handleEdit={() => this.handleEditHotel(hotel)}
                 handleDelete={() => this.handleDeleteHotel(hotel.id)}
               />
