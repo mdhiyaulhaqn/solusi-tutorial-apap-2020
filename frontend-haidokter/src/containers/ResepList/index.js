@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import classes from "./styles.module.css";
 import Modal from "../../components/Modal";
 import Pagination from "../../components/Pagination";
+import Spinner from "../../components/Spinner";
 
 const COUNT_PER_PAGE = 5;
 
@@ -45,12 +46,15 @@ class ResepList extends Component {
   }
 
   async loadData() {
+    this.setState({ isLoading: true });
     try {
       const { data } = await APIConfig.get("/reseps");
       this.setState({ reseps: data });
     } catch (error) {
       alert("Oops terjadi masalah pada server");
       console.log(error);
+    } finally {
+      this.setState({ isLoading: false });
     }
   }
 
@@ -150,6 +154,7 @@ class ResepList extends Component {
 
   render() {
     const filteredReseps = this.state.reseps.filter(this.handleFilterResep);
+    console.log(this.state.isLoading);
     return (
       <div className={classes.resepList}>
         <h1 className={classes.title}>All Reseps</h1>
@@ -164,25 +169,29 @@ class ResepList extends Component {
           value={this.state.searchResep}
           onChange={this.handleChangeField}
         />
-        <div>
-          {filteredReseps
-            .slice(
-              this.state.currentPage * COUNT_PER_PAGE,
-              (this.state.currentPage + 1) * 5
-            )
-            .map((resep) => (
-              <Resep
-                key={resep.noResep}
-                noResep={resep.noResep}
-                namaDokter={resep.namaDokter}
-                namaPasien={resep.namaPasien}
-                catatan={resep.catatan}
-                listObat={resep.listObat}
-                handleEdit={() => this.handleEditResep(resep)}
-                handleDelete={() => this.handleDeleteResep(resep.noResep)}
-              />
-            ))}
-        </div>
+        {this.state.isLoading ? (
+          <Spinner />
+        ) : (
+          <div>
+            {filteredReseps
+              .slice(
+                this.state.currentPage * COUNT_PER_PAGE,
+                (this.state.currentPage + 1) * 5
+              )
+              .map((resep) => (
+                <Resep
+                  key={resep.noResep}
+                  noResep={resep.noResep}
+                  namaDokter={resep.namaDokter}
+                  namaPasien={resep.namaPasien}
+                  catatan={resep.catatan}
+                  listObat={resep.listObat}
+                  handleEdit={() => this.handleEditResep(resep)}
+                  handleDelete={() => this.handleDeleteResep(resep.noResep)}
+                />
+              ))}
+          </div>
+        )}
         <Pagination
           totalPage={Math.ceil(filteredReseps.length / 5)}
           handleClickPage={this.handleChangePage}
