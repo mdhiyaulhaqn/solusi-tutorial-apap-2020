@@ -137,11 +137,7 @@ class HotelList extends Component {
     return (
       hotel.namaHotel
         .toLowerCase()
-        .includes(this.state.searchHotel.toLowerCase()) ||
-      hotel.alamat
-        .toLowerCase()
-        .includes(this.state.searchHotel.toLowerCase()) ||
-      hotel.nomorTelepon.toLowerCase().includes(this.state.searchHotel.toLowerCase())
+        .includes(this.state.searchHotel.toLowerCase()) 
     );
   }
 
